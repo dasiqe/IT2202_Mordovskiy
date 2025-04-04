@@ -22,6 +22,8 @@ class _AreaCalculatorState extends State<AreaCalculator> {
   final _widthField = TextEditingController();
   final _heightField = TextEditingController();
   String _square = '';
+  String _selectedMeasure = 'мм';
+  final List<String> _units = ['мм', 'см', 'м'];
 
   String formatValue(double value) {
     if (value % 1 == 0) {
@@ -42,7 +44,7 @@ class _AreaCalculatorState extends State<AreaCalculator> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                const Text('Ширина (мм):', style: TextStyle(fontSize: 20)),
+                const Text('Ширина:', style: TextStyle(fontSize: 20)),
                 TextFormField(
                   controller: _widthField,
                   keyboardType: TextInputType.number,
@@ -57,8 +59,8 @@ class _AreaCalculatorState extends State<AreaCalculator> {
                     return null;
                   },
                 ),
-                const SizedBox(height: 20),
-                const Text('Высота (мм):', style: TextStyle(fontSize: 20)),
+                const SizedBox(height: 10),
+                const Text('Высота:', style: TextStyle(fontSize: 20)),
                 TextFormField(
                   controller: _heightField,
                   keyboardType: TextInputType.number,
@@ -73,6 +75,22 @@ class _AreaCalculatorState extends State<AreaCalculator> {
                     return null;
                   },
                 ),
+                const SizedBox(height: 10),
+                const Text('Единицы измерения:', style: TextStyle(fontSize: 20)),
+                DropdownButtonFormField<String>(
+                  value: _selectedMeasure,
+                  items: _units.map((String unit) {
+                    return DropdownMenuItem<String>(
+                      value: unit,
+                      child: Text(unit),
+                    );
+                  }).toList(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      _selectedMeasure = newValue!;
+                    });
+                  },
+                ),
                 const SizedBox(height: 20),
                 Center(
                   child: ElevatedButton(
@@ -83,7 +101,7 @@ class _AreaCalculatorState extends State<AreaCalculator> {
                         final area = width * height;
                         setState(() {
                           _square =
-                              'S = ${formatValue(width)} * ${formatValue(height)} = ${formatValue(area)} (мм²)';
+                              'S = ${formatValue(width)} * ${formatValue(height)} = ${formatValue(area)} (${_selectedMeasure}²)';
                         });
                       }
                     },
