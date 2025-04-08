@@ -1,0 +1,2 @@
+C:/IT2202_Mordovskiy/laba_6/android/app/.cxx/Debug/d5a211qt/x86/CMakeFiles/edit_cache.dir
+C:/IT2202_Mordovskiy/laba_6/android/app/.cxx/Debug/d5a211qt/x86/CMakeFiles/rebuild_cache.dir
